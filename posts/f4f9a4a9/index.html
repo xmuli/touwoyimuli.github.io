@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="偕臧"><meta name="copyright" content="偕臧"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>`git`入门基础命令（小白到团队开发所需掌握的基本命令） | 偕臧</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.24/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_ed8vp4atwoj.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="shortcut icon" type="image/svg+xml" href="/favicon.ico"><link rel="mask-icon" href="/favicon.ico" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"ifmet.cn","root":"/","title":"偕臧的小站","version":"1.5.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><link rel="alternate" href="/atom.xml" title="偕臧" type="application/atom+xml"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-160972149-1"></script><script>if (CONFIG.hostname === location.hostname) {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-160972149-1');
+}</script><meta name="description" content="简介：  git学习：适合新手，开始使用git进行团队合作开发，需要掌握的基础git命令，不做知识点的工具书。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#96;git&#96;入门基础命令（小白到团队开发所需掌握的基本命令）">
+<meta property="og:url" content="https://ifmet.cn/posts/f4f9a4a9/index.html">
+<meta property="og:site_name" content="偕臧">
+<meta property="og:description" content="简介：  git学习：适合新手，开始使用git进行团队合作开发，需要掌握的基础git命令，不做知识点的工具书。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730215844.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730215922.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730214219.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730220016.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730222216.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730220217.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730220747.png">
+<meta property="article:published_time" content="2019-07-30T22:24:08.000Z">
+<meta property="article:modified_time" content="2019-07-30T22:24:08.000Z">
+<meta property="article:author" content="偕臧">
+<meta property="article:tag" content="偕臧, xmuli, c++, Qt, 哲学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730215844.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="偕臧"><img width="96" loading="lazy" src="/xmuli.png" alt="偕臧"><span class="site-author-status" title="一片四叶幸运草">🍀</span></a><div class="site-author-name"><a href="/about/">偕臧</a></div><a class="site-name" href="/about/site.html">偕臧</a><sub class="site-subtitle"></sub><div class="site-desciption">看待世界始终保持着好奇</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">244</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">24</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">28</span></a></div><a class="site-state-item hty-icon-button" href="https://ifmet.cn/about" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-rss-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="http://sighttp.qq.com/authd?IDKEY=31f3ef7312b39e2c8dc822ae2f4c3b3118e1a6f31cc83373" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/xmuli" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:xmulitech@gmail.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/106940738" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/xmulite" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/xmuli" title="Telegram" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://xmuli.blog.csdn.net" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-send-plane-2-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="友链直达" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-women-line"></use></svg></a><a class="links-item hty-icon-button" href="/learn/" title="学习他人" style="color:Pink"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-heart-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">简述：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">开发平台环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">背景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E6%AD%A4%E4%B9%8B%E5%89%8D%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">写此之前注意：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E5%91%BD%E4%BB%A4%E4%B9%8B%E5%89%8D%E7%9A%84%E9%A2%84%E5%A4%87%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">学习命令之前的预备：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-config%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">git config：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-init%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">git init：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-status%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">git status：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add"><span class="toc-number">9.</span> <span class="toc-text">git add:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-log"><span class="toc-number">10.</span> <span class="toc-text">git log:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-commit"><span class="toc-number">11.</span> <span class="toc-text">git commit:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-rm"><span class="toc-number">12.</span> <span class="toc-text">git rm:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-diff"><span class="toc-number">13.</span> <span class="toc-text">git diff:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-show"><span class="toc-number">14.</span> <span class="toc-text">git show:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-branch%EF%BC%9A"><span class="toc-number">15.</span> <span class="toc-text">git branch：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-checkout"><span class="toc-number">16.</span> <span class="toc-text">git checkout:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-rebase%EF%BC%9A"><span class="toc-number">17.</span> <span class="toc-text">git rebase：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-merge%EF%BC%9A"><span class="toc-number">18.</span> <span class="toc-text">git merge：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%EF%BC%9A"><span class="toc-number">19.</span> <span class="toc-text">冲突解决：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-stash%EF%BC%9A"><span class="toc-number">20.</span> <span class="toc-text">git stash：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-reset"><span class="toc-number">21.</span> <span class="toc-text">git reset:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-revert"><span class="toc-number">22.</span> <span class="toc-text">git revert:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-bisect"><span class="toc-number">23.</span> <span class="toc-text">git bisect:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-tag%EF%BC%9A"><span class="toc-number">24.</span> <span class="toc-text">git tag：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-clean%EF%BC%9A"><span class="toc-number">25.</span> <span class="toc-text">git clean：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-cherry-pick%EF%BC%9A"><span class="toc-number">26.</span> <span class="toc-text">git cherry-pick：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-submodule%EF%BC%9A"><span class="toc-number">27.</span> <span class="toc-text">git submodule：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-reflog%EF%BC%9A"><span class="toc-number">28.</span> <span class="toc-text">git reflog：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-ignore%EF%BC%9A"><span class="toc-number">29.</span> <span class="toc-text">git ignore：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E6%96%87%EF%BC%9A"><span class="toc-number">30.</span> <span class="toc-text">参考博文：</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://ifmet.cn/posts/f4f9a4a9/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="偕臧"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="偕臧"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">`git`入门基础命令（小白到团队开发所需掌握的基本命令）<a class="post-edit-link" href="https://github.com/xmuli/xmuliMark/tree/master/source/_posts/git-入门基础命令（小白到团队开发所需掌握的基本命令）.md" target="_blank" title="编辑" rel="noopener"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-edit-line"></use></svg></a></h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2019-07-30 22:24:08" itemprop="dateCreated datePublished" datetime="2019-07-30T22:24:08+00:00">2019-07-30</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">2.4k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-timer-line"></use></svg></span> <span title="阅读时长">9m</span></span></span><span class="leancloud_visitors" id="/posts/f4f9a4a9/" data-flag-title="`git`入门基础命令（小白到团队开发所需掌握的基本命令）"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-eye-line"></use></svg> <span class="leancloud-visitors-count"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category" href="/categories/%E5%AD%A6%E4%B9%A0-%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%EF%BC%8C%E8%BE%85%E5%8A%A9%E6%8A%80%E5%B7%A7/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">学习 - 编码规范，辅助技巧</span></a></span> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category" href="/categories/%E5%AD%A6%E4%B9%A0-Git/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">学习 - Git</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p><strong>简介：</strong>  <code>git</code>学习：适合新手，开始使用<code>git</code>进行团队合作开发，需要掌握的基础<code>git</code>命令，不做知识点的工具书。</p>
+<span id="more"></span>
+
+<p>[TOC]</p>
+<br>
+
+<blockquote>
+<p><font color=#D0087E size=4 face="STFangsong">本文初发于 “<a href="https://ifmet.cn/"><strong>偕臧的小站</strong></a>“，同步转载于此。</font></p>
+</blockquote>
+<br>
+
+<h2 id="简述："><a href="#简述：" class="headerlink" title="简述："></a>简述：</h2><p>​        本文可以做到掌握如下内容，掌握基础的<code>git</code>命令即可（达到能够在团队*[或商业化公司中]*，和队友一起协同开发即可）。更高深的技巧请移步<code>git</code>高深语法区。</p>
+<p>​       <code>git</code>学习：适合新手，开始使用<code>git</code>进行团队合作开发，需要掌握的基础<code>git</code>命令，不做知识点的工具书。</p>
+<br>
+
+<h2 id="开发平台环境："><a href="#开发平台环境：" class="headerlink" title="开发平台环境："></a>开发平台环境：</h2><p><strong>编程环境：</strong>  <code>win10 x64 专业版 1803</code>  操作系统版本：<code>17134.285</code> </p>
+<p><strong>编程软件：</strong>  <code>visual studio 2015</code>， <code>Qt Creator 4.8.2 (Enterprise)</code>， <code>Qt 5.9.8</code></p>
+<br>
+
+<h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p>学习<code>linux</code>之前，还是先学习一番<code>git</code>，之前一点<code>git</code>基础，之前只是使用 <a target="_blank" rel="noopener" href="https://desktop.github.com/">github for desktop </a> 的可视化工具来进行，git的使用，期间同时使用一下 <a target="_blank" rel="noopener" href="https://www.git-scm.com/downloads">git bash</a> ，但是一直没有系统的学习的git，可能是柑橘初次接触<code>git</code>那会，感觉晦涩难懂吧，毕竟有着名言：</p>
+<blockquote>
+<p>大佬们创照带界面UI，就是方便提升效率，那还为什么不使用呢？</p>
+</blockquote>
+<p>为了学习(<code>zhuangbi</code>)一下<code>linux</code>，和应该多接触版本控控制工具，且网上推崇的<code>git</code>工具，老实说，我是真的心之向往，（<code>github</code> 限制文件<code>100M</code> 很难受）。</p>
+<br>
+
+<h2 id="写此之前注意："><a href="#写此之前注意：" class="headerlink" title="写此之前注意："></a>写此之前注意：</h2><p><strong>不要为了写博文而只成为了网络知识点的搬运工，感动了自己，却忘记了根本是掌握</strong></p>
+<br>
+
+<h2 id="学习命令之前的预备："><a href="#学习命令之前的预备：" class="headerlink" title="学习命令之前的预备："></a>学习命令之前的预备：</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cd1430161149?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">https://www.jianshu.com/p/cd1430161149?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation</a> </p>
+<br>
+
+<h2 id="git-config："><a href="#git-config：" class="headerlink" title="git config："></a>git config：</h2><ul>
+<li>配置<code>git</code>环境，告诉电脑，你是谁（哪一个git账号）？</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git config <span class="token operator">--</span>global user<span class="token punctuation">.</span>email <span class="token string">"touwoyimuli@gmail.com"</span>
+git config <span class="token operator">--</span>global user<span class="token punctuation">.</span>name <span class="token string">"touwoyimuli"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>一：区别</strong></p>
+<p>参数–global含义：git config、git config –global、git config –system之前有何区别？</p>
+<p>1.执行<code>git config </code>，会打开该项目所属的配置文件（作用域最小，值针对当前项目有效）。</p>
+<p>2.执行<code>git config --global</code>，会打开<code>C:\Users\yuanyi\.gitconfig</code>下的配置文件（作用域中等，为登陆这台计算机的用户）。</p>
+<p>3.执行<code>git config --system</code>，会打开<code>D:\Program Files\Git\etc\gitconfig</code>（作用域最大，整台计算机，不管登陆那个帐号，不管哪个项目）。</p>
+<p><strong>二：优先级</strong></p>
+<p>有没有想过，如果三种配置里面都设置了某个参数，那么最后生效的是哪种呢？它们之前的优先级为（由高到低）：<code>git config</code> &gt; <code>git config --global</code> &gt; <code>git config --system</code>。</p>
+<p>也就是作用域范围越广的优先级越低，相信这个不难理解。</p>
+<br>
+
+<h2 id="git-init："><a href="#git-init：" class="headerlink" title="git init："></a>git init：</h2><ul>
+<li>初始化（该项目），将该项目（可看成文件夹）设置为带有<code>g</code>it管理的仓库</li>
+</ul>
+<br>
+
+<h2 id="git-status："><a href="#git-status：" class="headerlink" title="git status："></a>git status：</h2><ul>
+<li>判断该工程的文件的状态</li>
+</ul>
+<img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730215844.png"/ loading="lazy">
+
+<p>需要了解的git的几个区域的工作：</p>
+<p>【Untracked】：   没有加入Git管理的文件；<br>【Unmodified】：已经提交文件（即已经存在于Git仓库中文件）；<br>【Modified】：     已经存在于Git仓库的文件，后面做了修改但是没有提交；<br>【Staged】：         存在于Git暂存区，待提交的文件</p>
+<img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730215922.png"/ loading="lazy">
+
+<br>
+
+<h2 id="git-add"><a href="#git-add" class="headerlink" title="git add:"></a>git add:</h2><ul>
+<li>将文件夹项目，提交到暂存区（<code>staged</code>）</li>
+</ul>
+<p>高级用法：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git add <span class="token operator">-</span>p <span class="token comment">//分块add</span>
+git add <span class="token operator">-</span>u <span class="token comment">//只提交修改的文件，未追踪的不管</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>执行之后，会有如下：</p>
+<img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730214219.png"/ loading="lazy">
+
+<p>我的linux里面没有没有<code>s 参数</code> 自定义手动划分区域，不知道为什么？</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token punctuation">[</span>y<span class="token punctuation">,</span>n<span class="token punctuation">,</span>q<span class="token punctuation">,</span>a<span class="token punctuation">,</span>d<span class="token punctuation">,</span><span class="token operator">/</span><span class="token punctuation">,</span>K<span class="token punctuation">,</span>j<span class="token punctuation">,</span>J<span class="token punctuation">,</span>g<span class="token punctuation">,</span>e<span class="token punctuation">,</span><span class="token operator">?</span><span class="token punctuation">]</span>
+y <span class="token operator">-</span> stage <span class="token keyword">this</span> hunk 
+n <span class="token operator">-</span> <span class="token keyword">do</span> <span class="token operator">not</span> stage <span class="token keyword">this</span> hunk 
+q <span class="token operator">-</span> quit<span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token operator">not</span> stage <span class="token keyword">this</span> hunk nor any of the remaining ones 
+a <span class="token operator">-</span> stage <span class="token keyword">this</span> hunk <span class="token operator">and</span> all later hunks in the file 
+d <span class="token operator">-</span> <span class="token keyword">do</span> <span class="token operator">not</span> stage <span class="token keyword">this</span> hunk nor any of the later hunks in the file 
+g <span class="token operator">-</span> select a hunk to go to 
+<span class="token operator">/</span> <span class="token operator">-</span> search <span class="token keyword">for</span> a hunk matching the given regex 
+j <span class="token operator">-</span> leave <span class="token keyword">this</span> hunk undecided<span class="token punctuation">,</span> see next undecided hunk 
+J <span class="token operator">-</span> leave <span class="token keyword">this</span> hunk undecided<span class="token punctuation">,</span> see next hunk 
+k <span class="token operator">-</span> leave <span class="token keyword">this</span> hunk undecided<span class="token punctuation">,</span> see previous undecided hunk 
+K <span class="token operator">-</span> leave <span class="token keyword">this</span> hunk undecided<span class="token punctuation">,</span> see previous hunk 
+s <span class="token operator">-</span> split the current hunk into smaller hunks 
+e <span class="token operator">-</span> manually edit the current hunk 
+<span class="token operator">?</span> <span class="token operator">-</span> print help<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上面的翻译如下：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">y <span class="token operator">-</span> 存储这个hunk 
+n <span class="token operator">-</span> 不存储这个hunk 
+q <span class="token operator">-</span> 离开，不存储这个hunk和其他hunk 
+a <span class="token operator">-</span> 存储这个hunk和这个文件后面的hunk 
+d <span class="token operator">-</span> 不存储这个hunk和这个文件后面的hunk 
+g <span class="token operator">-</span> 选择一个hunk 
+<span class="token operator">/</span> <span class="token operator">-</span> 通过正则查找hunk 
+j <span class="token operator">-</span> 不确定是否存储这个hunk，看下一个不确定的hunk 
+J <span class="token operator">-</span> 不确定是否存储这个hunk，看下一个hunk 
+k <span class="token operator">-</span> 不确定是否存储这个hunk，看上一个不确定的hunk 
+K <span class="token operator">-</span>不确定是否存储这个hunk，看上一个hunk 
+s <span class="token operator">-</span> 把当前的hunk分成更小的hunks 
+e <span class="token operator">-</span> 手动编辑当前的hunk 
+<span class="token operator">?</span> <span class="token operator">-</span> 输出帮助信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-log"><a href="#git-log" class="headerlink" title="git log:"></a>git log:</h2><ul>
+<li>查看时间线：所有的<code>commit</code>提交</li>
+</ul>
+<img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730220016.png"/ loading="lazy">
+
+<br>
+
+<h2 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit:"></a>git commit:</h2><ul>
+<li>提交项目</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git commit <span class="token string">"项目简介一句话"</span>  <span class="token comment">//不推荐</span>
+git commit           <span class="token comment">//会自动跳到一个单独的文件，写完整的提交信息   //实际工作中</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-rm"><a href="#git-rm" class="headerlink" title="git rm:"></a>git rm:</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git rm <span class="token operator">--</span>cached <span class="token comment">//重暂存区移除，文件还在</span>
+git rm <span class="token operator">-</span>f       <span class="token comment">//直接删除文件，并且重git仓库移除</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff:"></a>git diff:</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git diff master    <span class="token comment">//查看当前分支做了哪些改动</span>
+git diff <span class="token operator">--</span>cached  <span class="token comment">//查看已经staged（不记得回看上面的那个区图）文件改动</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-show"><a href="#git-show" class="headerlink" title="git show:"></a>git show:</h2><ul>
+<li>显示某一个项目的具体信息</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">git show<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-branch："><a href="#git-branch：" class="headerlink" title="git branch："></a>git branch：</h2><ul>
+<li>一般用于分支的操作，比如创建分支，查看分支等等</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git branch       <span class="token comment">//列出本地已经存在的分支，并且在当前分支的前面用"*"标记</span>
+git branch <span class="token operator">-</span>r    <span class="token comment">//查看远程版本库分支列表</span>
+git branch <span class="token operator">-</span>a    <span class="token comment">//查看所有分支列表，包括本地和远程</span>
+git branch dev   <span class="token comment">//创建名为dev的分支，创建分支时需要是最新的环境，创建分支但依然停留在当前分支</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout:"></a>git checkout:</h2><ul>
+<li>操作分支</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git checkout master     <span class="token comment">//将分支切换到master</span>
+git checkout <span class="token operator">-</span>b master  <span class="token comment">//如果分支存在则只切换分支，若不存在则创建并切换到master分支，repo start是对git checkout -b这个命令的封装，将所有仓库的分支都切换到master，master是分支名，</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-rebase："><a href="#git-rebase：" class="headerlink" title="git rebase："></a>git rebase：</h2><p> <a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=G9aDyNNdYNN0EkHcDhYXKNkTH18WrrNVF999_GBt8Ug8xhw6GbGk_AkeRCqd5nO2B_-L0fTaFBiyrE5kP6eRYS321z4pKOEjwR3doMzCwrq&wd=&eqid=a666ce3b0070882b000000045d403223">廖雪峰的<em>git</em>教程 - <em>Rebase</em> - 廖雪峰的官方网站 </a> </p>
+<br>
+
+<h2 id="git-merge："><a href="#git-merge：" class="headerlink" title="git merge："></a>git merge：</h2><p><a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=uA3_4yNe4yHTvSkh7duH_lmK4L_XE_c_QZZ2W5QqiOX1_Q1GrEue6VPuKQbSw4JR9ZPUFR3kIGNbQNIY2Ro5-_-63YEpemsP3olaXZ2XuQO&ck=11700.5.0.0.0.246.176.0&shh=www.baidu.com&sht=baidu&wd=&eqid=de4c72f700760aac000000045d4032d8"><em>git</em>在工作中的正确使用方式—<em>git merge</em>篇 - nrsc - CSDN博客</a> </p>
+<br>
+
+<h2 id="冲突解决："><a href="#冲突解决：" class="headerlink" title="冲突解决："></a>冲突解决：</h2><ul>
+<li>手动解决</li>
+<li>git mergtool</li>
+</ul>
+<br>
+
+<p><strong>//+++++++++++++++++++++++++++分割，建议歇一会，再开始看下面的++++++++++++++++++++++++</strong></p>
+<br>
+
+<h2 id="git-stash："><a href="#git-stash：" class="headerlink" title="git stash："></a>git stash：</h2><ul>
+<li>备份当前仓库状态</li>
+</ul>
+<br>
+
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset:"></a>git reset:</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git reset          <span class="token comment">//仓库文件不变，git提交信息被更改</span>
+git reset <span class="token operator">--</span>hard   <span class="token comment">//仓库文件强制回滚到commit</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert:"></a>git revert:</h2><ul>
+<li>git reset的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本，如下图所示，假设我们要回退到版本一：</li>
+</ul>
+<img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730222216.png"/ loading="lazy">
+
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/yxlshk/article/details/79944535">Git恢复之前版本的两种方法reset、revert（图文详解）</a> </p>
+<br>
+
+<h2 id="git-bisect"><a href="#git-bisect" class="headerlink" title="git bisect:"></a>git bisect:</h2><ul>
+<li>用来查找哪一次代码提交引入了错误。</li>
+<li>二分查找，排错</li>
+</ul>
+<p> <a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=lqeenJf_8WgBO2JKsMpH1ca7K5TZEGF5Jt7OaZTX2-O5DxnxdgJBMkeOXe_x3vFoLYjNMuqXdtQcwFE8RnM-B_&wd=&eqid=9ca323ee0032aca9000000045d4034d0"><em>git</em> <em>bisect</em> 命令教程 - 阮一峰的网络日志</a> </p>
+<br>
+
+<h2 id="git-tag："><a href="#git-tag：" class="headerlink" title="git tag："></a>git tag：</h2><ul>
+<li>tag是git版本库的一个标记，指向某个commit的指针。</li>
+</ul>
+<p> <a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=kri4FpJf7XZN2teqfO78VKbjiIGVh7dacRXa_Ax4CyN--npYWUBPL3yQmH3gjYTCTk5icT6ruBEdAXEegWe1n6KV-1rGhCJqx2F_L9ng-R7&wd=&eqid=d21b29ff0039f5be000000045d403549"><em>Git</em>中<em>tag</em>标签的使用 - 等待化茧成蝶的专栏 - CSDN博客</a> </p>
+<br>
+
+<h2 id="git-clean："><a href="#git-clean：" class="headerlink" title="git clean："></a>git clean：</h2><ul>
+<li>删库到跑路，被老板抓住，打断腿，是一个工作几个月可赚60W的命令</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">git clean <span class="token operator">-</span>fd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<br>
+
+<h2 id="git-cherry-pick："><a href="#git-cherry-pick：" class="headerlink" title="git cherry-pick："></a>git cherry-pick：</h2><ul>
+<li>看做“局部合并”</li>
+<li>可以理解为”挑拣”提交，它会获取某一个分支的单笔提交，并作为一个新的提交引入到你当前分支上。 当我们需要在本地合入其他分支的提交时，如果我们不想对整个分支进行合并，而是只想将某一次提交合入到本地当前分支上</li>
+</ul>
+<br>
+
+<h2 id="git-submodule："><a href="#git-submodule：" class="headerlink" title="git submodule："></a>git submodule：</h2><ul>
+<li>当一个项目需要包含其他支持项目源码时使用的功能，作用是两个项目是独立的，且主项目可以使用另一个支持项目。</li>
+</ul>
+<br>
+
+<h2 id="git-reflog："><a href="#git-reflog：" class="headerlink" title="git reflog："></a>git reflog：</h2><ul>
+<li><p>可以查看所有分支的所有操作记录（包括已经被删除的 <code>commit</code> 记录和 <code>reset</code> 的操作）</p>
+<p>  例如执行 <code>git reset --hard HEAD~1</code>，退回到上一个版本，用<code>git log</code>则是看不出来被删除的<code>commitid</code>，用<code>git reflog</code>则可以看到被删除的<code>commitid</code>，我们就可以买后悔药，恢复到被删除的那个版本。</p>
+  <img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730220217.png"/ loading="lazy">
+
+  <br></li>
+</ul>
+<h2 id="git-ignore："><a href="#git-ignore：" class="headerlink" title="git ignore："></a>git ignore：</h2><ul>
+<li>来忽略某些文件的提交</li>
+</ul>
+<p><strong>规则  作用</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token operator">/</span>mtk    过滤整个文件夹
+<span class="token operator">*</span><span class="token punctuation">.</span>zip   过滤所有<span class="token punctuation">.</span>zip文件
+<span class="token operator">/</span>mtk<span class="token operator">/</span><span class="token keyword">do</span><span class="token punctuation">.</span>c   过滤某个具体文件
+<span class="token operator">!</span><span class="token operator">/</span>mtk<span class="token operator">/</span>one<span class="token punctuation">.</span>txt   追踪（不过滤）某个具体文件
+注意：如果你创建<span class="token punctuation">.</span>gitignore文件之前就push了某一文件，那么即使你在<span class="token punctuation">.</span>gitignore文件中写入过滤该文件的规则，该规则也不会起作用，git仍然会对该文件进行版本管理。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>配置语法</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">以斜杠“<span class="token operator">/</span>”开头表示目录；
+以星号“<span class="token operator">*</span>”通配多个字符；
+以问号“<span class="token operator">?</span>”通配单个字符
+以方括号“<span class="token punctuation">[</span><span class="token punctuation">]</span>”包含单个字符的匹配列表；
+以叹号“<span class="token operator">!</span>”表示不忽略<span class="token punctuation">(</span>跟踪<span class="token punctuation">)</span>匹配到的文件或目录。
+注意： git 对于 <span class="token punctuation">.</span>gitignore配置文件是按行从上到下进行规则匹配的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<br>
+
+<h2 id="参考博文："><a href="#参考博文：" class="headerlink" title="参考博文："></a>参考博文：</h2><p>因为有着热心网友的无私分享，故不辞辛苦也将自己的项目或经验整理成博客的形式，也提供给一起大家学习探讨与交流 </p>
+<p> <a target="_blank" rel="noopener" href="https://git-scm.com/doc">git 官方book 英文</a> （推荐）</p>
+<p> <a target="_blank" rel="noopener" href="http://gitbook.liuhui998.com/index.html">git book 中文</a> （推荐）</p>
+<p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/clsn/p/7929958.html">Git详解及 github与gitlab使用</a> （推荐，系列）</p>
+<p> <a target="_blank" rel="noopener" href="https://www.daixiaorui.com/read/240.html">直接git config和带–global、–system的区别</a> </p>
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/diehuang3426/article/details/82588028">Git合并单个文件和[y,n,q,a,d,/,K,j,J,g,e,?]</a> </p>
+<p> <a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-Git-%E5%88%AB%E5%90%8D">2.7 Git 基础 - Git 别名</a> </p>
+<p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianqiannian/p/6011404.html">Git branch &amp;&amp; Git checkout常见用法</a> </p>
+<img src="https://raw.githubusercontent.com/touwoyimuli/FigureBed/master/img/20190730220747.png"/ loading="lazy">
+
+<br>
+
+<blockquote>
+<p><font color=#D0087E size=4 face="STFangsong">本文初发于 “<a href="https://ifmet.cn/"><strong>偕臧的小站</strong></a>“，同步转载于此。</font></p>
+</blockquote>
+<br></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">若文章有所感所获，亦可请我共饮一杯肥宅冰阔落；</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2020/20200701013332.png"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2020/20200701013332.png" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-alipay-line"></use></svg></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2020/20200701013449.png"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2020/20200701013449.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-pay-line"></use></svg></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2020/20200701013628.png"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2020/20200701013628.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>偕臧</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://ifmet.cn/posts/f4f9a4a9/" title="`git`入门基础命令（小白到团队开发所需掌握的基本命令）">https://ifmet.cn/posts/f4f9a4a9/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/fd870c38/" rel="prev" title="三十分钟学会Git（写的挺好的一篇）"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">三十分钟学会Git（写的挺好的一篇）</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/bcab0980/" rel="next" title="`Qt图片的绘图类`QPixmap`/`QBitmap`/`QImage`/`QPicture`区别和使用"><span class="post-nav-text">`Qt图片的绘图类`QPixmap`/`QBitmap`/`QImage`/`QPicture`区别和使用</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span></span><br></div><div id="valine-container"></div><script>Yun.utils.getScript("https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js", () => {
+  const valineConfig = {"enable":true,"appId":"j1ERzyBCVwKtzx1t7EOv5ur8-MdYXbMMI","appKey":"EuraMPDEgt5G8iLWSNrkQ49n","placeholder":"不同的观点和想法相遇，促进彼此的成长，当然，这里也可以俏皮一下 (´・ω・`) ~~~ (填写邮箱可以收到回复)","avatar":"wavatar","pageSize":10,"visitor":true,"highlight":true,"recordIP":true,"enableQQ":true,"meta":["nick","mail","link"],"el":"#valine-container","lang":"zh-cn"}
+  valineConfig.path = "/posts/f4f9a4a9/"
+  new Valine(valineConfig)
+}, window.Valine);</script></div></main><footer class="sidebar-translate" id="footer"><div class="beian"><a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2021002780号</a></div><div class="copyright"><span>&copy; 2019 – 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 偕臧</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.5.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2019-06-09T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div id="local-search-result"></div></div><script>const date = new Date();
+const today = (date.getMonth() + 1) + "-" + date.getDate()
+const mourn_days = ["4-4"]
+if (mourn_days.includes(today)) {
+  document.documentElement.style.filter = "grayscale(1)";
+}</script></div></body></html>
